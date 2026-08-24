@@ -1,8 +1,16 @@
-# FresherAI
 
-FresherAI is an intelligent career growth platform built for freshers and early-career professionals. It combines AI-powered resume optimization, interview preparation, personalized learning roadmaps, analytics, and secure user access into one unified experience.
+<div align="center">
+      <img width="226" alt="image" src="https://github.com/pattjoshi/Fresher-Multi-Agent-AI-/blob/master/frontend/public/logo.png">
 
-The platform is designed to help users improve their resume, practice real-world interviews, get actionable feedback, and build a clear learning path toward their desired job roles and salary targets.
+##  Fresher AI 
+
+
+FresherAI is an intelligent career growth platform built for freshers and early-career professionals. It combines AI-powered resume optimization, interview preparation, personalized learning roadmaps, analytics, and secure user access into one unified experience. The platform is designed to help users improve their resume, practice real-world interviews, get actionable feedback, and build a clear learning path toward their desired job roles and salary targets.
+
+</div>
+
+<h3 ><a href="https://github.com/pattjoshi/Fresher-Multi-Agent-AI-/tree/master#screenshot">screenshot </a></h3>
+
 
 ## Why FresherAI
 
@@ -76,6 +84,11 @@ FresherAI addresses all three by combining multiple AI agents and services into 
 - Independent backend services for auth, resume, interview, roadmap, and billing
 - Modular architecture for easier scaling and maintenance
 - Shared Redis integration for caching and fast access
+
+
+## screenshot   
+
+
 
 ## Project Architecture
 
@@ -350,4 +363,27 @@ This project is intended for educational and demonstration purposes. Please chec
 
 ## Conclusion
 
-FresherAI is a complete AI-assisted career preparation tool designed for freshers who want to improve their interview readiness, optimize their resume, and follow a practical roadmap toward their target roles. It combines the power of AI, user analytics, and a scalable microservice backend into a modern product experience.
+
+
+
+## YouTub :- [I Learn from this ](https://www.youtube.com/watch?v=pJORx7LMupg&t=1777s "part 1")
+-  YouTub :- [I Learn from this ](https://www.youtube.com/watch?v=Dw9Y94O9JFU&t=38568s "part 2")
+-  YouTub :- [I Learn from this ](https://www.youtube.com/watch?v=OOG7DRoMAX4 "part 3")
+-  YouTub :- [I Learn from this ](https://www.youtube.com/watch?v=8CA3hLpDVoc " how to close it part 4")
+
+
+
+🙏 If you find this repo helpful then don't forget to give a star ❇️ to this repository. :)
+
+<p align="center"><a href="https://github.com/nastyox/Rando.js#nastyox"><img src="http://randojs.com/images/barsSmallTransparentBackground.gif" alt="Animated footer bars" width="100%"/></a></p>
+<br/>
+<p align="center"><a href="https://github.com/pattjoshi/Fresher-Multi-Agent-AI-/tree/master#"><img src="http://randojs.com/images/backToTopButtonTransparentBackground.png" alt="Back to top" height="29"/></a></p>
+
+
+
+
+
+
+
+
+
