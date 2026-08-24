@@ -1,79 +1,264 @@
-# FresherAI Local Setup Guide
+# FresherAI
 
-This project is a full-stack app with a React frontend and multiple Node.js backend services. To run it locally, you need to start Redis, start each backend service, and then run the frontend.
+FresherAI is an intelligent career growth platform built for freshers and early-career professionals. It combines AI-powered resume optimization, interview preparation, personalized learning roadmaps, analytics, and secure user access into one unified experience.
 
-## Prerequisites
+The platform is designed to help users improve their resume, practice real-world interviews, get actionable feedback, and build a clear learning path toward their desired job roles and salary targets.
 
-Make sure the following are installed on your machine:
+## Why FresherAI
 
-- Node.js 18+ and npm
-- Git
-- Docker Desktop (for Redis)
-- A MongoDB instance (local or cloud)
-- Firebase project credentials
+Most job seekers struggle with three major problems:
+
+- creating an ATS-friendly resume that stands out
+- practicing interviews without structured feedback
+- not knowing what to learn next to reach a target role or package
+
+FresherAI addresses all three by combining multiple AI agents and services into a single career preparation platform.
+
+## Key Features
+
+### 1. AI Resume Builder
+
+- Create and edit professional resumes step by step
+- Add personal details, summary, skills, work experience, projects, and education
+- Preview resume content before finalizing
+- Build ATS-friendly resumes tailored for job applications
+- Save and manage resume data for future use
+
+### 2. AI Interview Preparation
+
+- Simulate interview sessions with AI-driven questions
+- Support for technical, HR, and coding interview workflows
+- Real-time interview flow with an interactive coding/editor experience
+- Track interview history and performance trends
+- View detailed scoring reports after each session
+- Measure performance across technical and HR dimensions
+
+### 3. Interview Feedback and Analytics
+
+- Generate performance insights after each interview
+- Review answer quality and evaluation structure
+- Track total interviews, total questions attempted, completion rate, and average score
+- Monitor user progress over time with visual analytics dashboards
+- Analyze strengths and identify weak areas for improvement
+
+### 4. Personalized AI Roadmap Generator
+
+- Create a roadmap for a target role such as Frontend Developer, Backend Engineer, or ML Engineer
+- Generate learning paths customized to user goals and salary expectations
+- Use a resume-based context when available
+- Build focused, actionable study plans to improve skills systematically
+- Access roadmap history and previously generated plans
+
+### 5. Career Dashboard
+
+- Centralized overview of interview performance
+- Visual metrics and charts for interview stats
+- Quick navigation to resume, interview, roadmap, and billing modules
+- User-specific dashboard experience after login
+
+### 6. User Authentication and Access Control
+
+- Secure login and user session handling
+- Firebase-powered authentication
+- Protected routes for application features
+- Logout and session-based access management
+
+### 7. Subscription and Billing
+
+- Razorpay-powered billing integrations
+- Plans and premium feature access
+- User coin-based activity tracking for AI features
+- Monetization support for premium career features
+
+### 8. Multi-Service Backend Architecture
+
+- Gateway service for request routing and proxying
+- Independent backend services for auth, resume, interview, roadmap, and billing
+- Modular architecture for easier scaling and maintenance
+- Shared Redis integration for caching and fast access
+
+## Project Architecture
+
+The application uses a modular microservice-style backend with a React frontend.
+
+- Frontend: React + Vite
+- Backend: Node.js + Express
+- Service routing: API Gateway
+- Database: MongoDB
+- Caching: Redis
+- Authentication: Firebase + secure backend sessions
+- Payments: Razorpay
+- Containerization: Docker
+
+## System Overview
+
+```text
+Frontend (React + Vite)
+        |
+        v
+API Gateway (Express)
+  |  |  |  |  |
+  v  v  v  v  v
+Auth Resume Interview Roadmap Billing
+  |      |       |        |
+  v      v       v        v
+MongoDB MongoDB MongoDB MongoDB
+  |
+  v
+Redis
+```
+
+## Tech Stack
+
+### Frontend
+
+- React
+- Vite
+- JavaScript / JSX
+- Tailwind-inspired styling
+- Motion UI animations
+- React Router
+- Redux Toolkit
+- Firebase client configuration
+- Axios for API calls
+
+### Backend
+
+- Node.js
+- Express.js
+- MongoDB with Mongoose
+- Redis
+- dotenv configuration
+- Firebase Admin SDK
+- Razorpay SDK
+
+### DevOps and Utilities
+
+- Docker
+- Docker Compose
+- Node package management
+- Environment-based configuration
+
+## Application Modules
+
+### Landing Page
+
+The app starts with a polished landing page that introduces the product and highlights its AI-driven job preparation tools.
+
+### Dashboard
+
+Users get a performance dashboard displaying:
+
+- total interviews created
+- total questions answered
+- completed interviews
+- average score
+- historical interview charts
+
+### Resume Builder
+
+The resume module helps users build a structured resume in multiple sections, including:
+
+- profile summary
+- skills
+- experience
+- projects
+- education
+
+### Interview Module
+
+The interview feature supports a guided flow where users can:
+
+- start a session
+- answer AI-generated interview questions
+- proceed through multiple stages of interview practice
+- receive automated scoring and evaluation reports
+
+### Roadmap Builder
+
+Users can define a target role and package and receive a personalized roadmap that helps them learn the right skills in the correct order.
+
+### Billing Module
+
+The billing module supports premium access and key subscription-related flows through Razorpay.
+
+## Core Workflow
+
+1. User signs in using Firebase-based authentication.
+2. User creates or updates a resume profile.
+3. User practices interview sessions with AI assistance.
+4. The platform evaluates responses and generates analytics.
+5. User generates a customized roadmap based on goals and salary target.
+6. User can access premium features and billing options when needed.
+
+## Project Structure
+
+```text
+fresherAI/
+├── backend/
+│   ├── gateway/
+│   ├── services/
+│   ├── shared/
+│   ├── docker-compose.yml
+│   ├── package.json
+│   └── .dockerignore
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   ├── vite.config.js
+│   └── README.md
+├── .gitignore
+├── README.md
+├── professional.md
+└── deployment.txt
+```
+
+## Environment Configuration
+
+The project relies heavily on environment variables for service connectivity and secrets.
+
+Typical configuration includes:
+
+- backend gateway URL and service URLs
+- MongoDB connection strings
+- Redis URL
+- Firebase configuration values
 - Razorpay keys
-- Any API keys required by the AI services (for example Groq/YouTube)
+- AI provider API keys
+- frontend backend URL
 
-## 1) Clone the repository
+Important: never commit `.env` files to GitHub. Keep all secrets secure.
+
+## Local Setup
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+- Docker Desktop
+- MongoDB
+- Firebase project
+- Razorpay account
+- Required AI API keys
+
+### 1. Clone the project
 
 ```bash
-git clone <your-repository-url>
+git clone <repository-url>
 cd fresherAI
 ```
 
-## 2) Create environment files
-
-Create or update `.env` files in the app folders before running the project. The app expects configuration values such as:
-
-- `PORT`
-- `MONGODB_URL`
-- `REDIS_URL`
-- `FRONTEND_URL`
-- `AUTH_SERVICE_URL`
-- `RESUME_SERVICE_URL`
-- `INTERVIEW_SERVICE_URL`
-- `ROADMAP_SERVICE_URL`
-- `BILLING_SERVICE_URL`
-- Firebase configuration values
-- Razorpay keys
-- Any AI provider keys
-
-Examples:
-
-```env
-# backend/gateway/.env
-PORT=6000
-FRONTEND_URL=http://localhost:5173
-AUTH_SERVICE_URL=http://localhost:6001
-RESUME_SERVICE_URL=http://localhost:6002
-INTERVIEW_SERVICE_URL=http://localhost:6003
-ROADMAP_SERVICE_URL=http://localhost:6004
-BILLING_SERVICE_URL=http://localhost:6005
-```
-
-```env
-# frontend/.env
-VITE_BACKEND_URL=http://localhost:6000
-VITE_FIREBASE_APIKEY=your_firebase_api_key
-VITE_RAZORPAY_KEY_ID=your_razorpay_key_id
-```
-
-Each backend service also has its own `.env` file and should include its own `PORT` and required secret/API keys.
-
-## 3) Start Redis
-
-From the backend folder:
+### 2. Start Redis
 
 ```bash
 cd backend
 docker compose up -d
 ```
 
-This starts the Redis container used by the app.
+### 3. Install backend dependencies
 
-## 4) Install backend dependencies
-
-Open a separate terminal for each service and run:
+Run each backend service in a separate terminal:
 
 ```bash
 cd backend/gateway
@@ -111,18 +296,7 @@ npm install
 npm run dev
 ```
 
-The backend services will run on these local ports:
-
-- Gateway: `http://localhost:6000`
-- Auth: `http://localhost:6001`
-- Resume: `http://localhost:6002`
-- Interview: `http://localhost:6003`
-- Roadmap: `http://localhost:6004`
-- Billing: `http://localhost:6005`
-
-## 5) Start the frontend
-
-Open a new terminal:
+### 4. Start the frontend
 
 ```bash
 cd frontend
@@ -130,47 +304,50 @@ npm install
 npm run dev -- --host
 ```
 
-Then open the frontend in the browser:
+Open the application in the browser:
 
 ```text
 http://localhost:5173
 ```
 
-## 6) Common development workflow
+## Default Service Ports
 
-If you are working on the project locally:
+- Gateway: http://localhost:6000
+- Auth Service: http://localhost:6001
+- Resume Service: http://localhost:6002
+- Interview Service: http://localhost:6003
+- Roadmap Service: http://localhost:6004
+- Billing Service: http://localhost:6005
 
-1. Start Docker for Redis.
-2. Start the gateway and all backend services.
-3. Start the frontend.
-4. Use the app in the browser.
+## Deployment Notes
 
-## 7) Production-style Docker build
+The project includes Docker-related setup files for containerized deployment. The backend is designed to run as multiple independent services, which makes it easier to deploy on cloud platforms such as AWS, Railway, Render, or Docker-based orchestration environments.
 
-If you want to build the containers manually:
+## Benefits of FresherAI
 
-```bash
-cd backend
-docker build -f ./gateway/Dockerfile -t gateway .
-docker build -f ./services/auth/Dockerfile -t auth-service .
-docker build -f ./services/billing/Dockerfile -t billing-service .
-docker build -f ./services/interview/Dockerfile -t interview-service .
-docker build -f ./services/resume/Dockerfile -t resume-service .
-docker build -f ./services/roadmap/Dockerfile -t roadmap-service .
-```
+- Helps freshers prepare for job interviews with AI support
+- Reduces uncertainty in career planning
+- Creates a clearer path from resume creation to internship/job readiness
+- Improves interview confidence through structured practice
+- Gives actionable insights to help users improve faster
+- Merges multiple career tools into one unified platform
 
-Then run them with Docker as needed.
+## Future Enhancements
 
-## Troubleshooting
+Potential future improvements include:
 
-- If Redis is not running, start it again with `docker compose up -d`.
-- If the frontend cannot connect to the backend, check `VITE_BACKEND_URL` and gateway port values.
-- If a service fails to start, confirm its `.env` file contains valid `PORT` and database/API credentials.
-- If MongoDB fails, verify the `MONGODB_URL` is correct and reachable.
-- If Firebase or Razorpay features fail, check your config keys in the frontend and backend `.env` files.
+- advanced AI interview scoring models
+- multi-language support
+- recruiter dashboards
+- more detailed roadmap personalization
+- premium analytics reports
+- exportable resume templates
+- improved team and admin management
 
-## Notes
+## License
 
-- The repo uses a multi-service architecture, so do not run only the frontend and expect the backend to work automatically.
-- This project depends on external services such as Redis, MongoDB, Firebase, and AI APIs.
-- Keep `.env` files private and do not commit them to GitHub.
+This project is intended for educational and demonstration purposes. Please check the repository license before public distribution or commercial use.
+
+## Conclusion
+
+FresherAI is a complete AI-assisted career preparation tool designed for freshers who want to improve their interview readiness, optimize their resume, and follow a practical roadmap toward their target roles. It combines the power of AI, user analytics, and a scalable microservice backend into a modern product experience.
