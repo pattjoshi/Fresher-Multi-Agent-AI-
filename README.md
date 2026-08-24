@@ -377,10 +377,10 @@ This project is intended for educational and demonstration purposes. Please chec
 
 
 
-## YouTub :- [I Learn from this ](https://www.youtube.com/watch?v=pJORx7LMupg&t=1777s "part 1")
--  YouTub :- [I Learn from this ](https://www.youtube.com/watch?v=Dw9Y94O9JFU&t=38568s "part 2")
--  YouTub :- [I Learn from this ](https://www.youtube.com/watch?v=OOG7DRoMAX4 "part 3")
--  YouTub :- [I Learn from this ](https://www.youtube.com/watch?v=8CA3hLpDVoc " how to close it part 4")
+## YouTub :- [part 1](https://www.youtube.com/watch?v=pJORx7LMupg&t=1777s "part 1")
+-  YouTub :- [part 2](https://www.youtube.com/watch?v=Dw9Y94O9JFU&t=38568s "part 2")
+-  YouTub :- [part 3 ](https://www.youtube.com/watch?v=OOG7DRoMAX4 "part 3")
+-  YouTub :- [how to clone it part 4 ](https://www.youtube.com/watch?v=8CA3hLpDVoc " how to clone it part 4")
 
 
 
