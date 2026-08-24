@@ -9,7 +9,7 @@ FresherAI is an intelligent career growth platform built for freshers and early-
 
 </div>
 
-<h3 ><a href="https://github.com/pattjoshi/Fresher-Multi-Agent-AI-/tree/master#screenshot">screenshot </a></h3>
+<h3 ><a href="https://github.com/pattjoshi/Fresher-Multi-Agent-AI-/tree/master#screenshot">Click to move screenshot  section </a></h3>
 
 
 ## Why FresherAI
@@ -88,6 +88,17 @@ FresherAI addresses all three by combining multiple AI agents and services into 
 
 ## screenshot   
 
+
+<table>
+  <tr>
+    <td><img width="960" alt="image" src="https://github.com/user-attachments/assets/cfaf8423-a167-4f3d-9715-1252eadd7e04" alt="mockup"/></td>
+    <td><<img width="960" alt="image" src="https://github.com/user-attachments/assets/e6d3ff96-7ade-4078-a04f-b45412d5cfdd" alt="mockup"/></td>
+  </tr>
+  <tr>
+    <td><img width="960" alt="image" src="https://github.com/user-attachments/assets/7024f6a2-4a20-4277-93c0-cd3b58fc8876"alt="mockup"/></td>
+    <td><img width="960" alt="image" src="https://github.com/user-attachments/assets/0901e260-c376-4c8f-8b07-b0f1ef98d730"alt="mockup"/></td>
+  </tr>
+</table>
 
 
 ## Project Architecture
