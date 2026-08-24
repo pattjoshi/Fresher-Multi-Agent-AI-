@@ -212,6 +212,204 @@ The most valuable features to build next are:
 - premium subscription plans
 - job recommendation + application tracking
 
-## Conclusion
 
-The biggest opportunity for FresherAI is to become a complete AI-powered career companion rather than just an interview simulator. By improving personalization, analytics, and career guidance, the app can deliver strong value to freshers preparing for jobs and internships.
+# AWS Deployment Guide for FresherAI
+
+This repository is structured as a microservice-based application and is designed to be deployed on AWS using containerized services. The deployment flow described in this project matches the following AWS services:
+
+## 1. Core AWS Services Used
+
+### Amazon ECR (Elastic Container Registry)
+- Stores Docker images for the application services.
+- Each backend service (gateway, auth, resume, interview, roadmap, billing) can be containerized and pushed to ECR.
+- This is the standard AWS service for managing container images before deployment.
+
+### Amazon ECS (Elastic Container Service)
+- Runs the Docker containers for the app services.
+- The project includes multiple microservices, so ECS is the most suitable service for deployment.
+- ECS can run tasks/services for:
+  - gateway
+  - auth
+  - resume
+  - interview
+  - roadmap
+  - billing
+
+### Application Load Balancer (ALB)
+- Receives incoming traffic from the internet.
+- Routes requests to the correct ECS service/task.
+- Matches the repo's service routing pattern such as:
+  - `/api/auth`
+  - `/api/billing`
+  - `/api/interview`
+  - `/api/roadmap`
+  - `/api/resume`
+
+### Target Groups
+- Used by ALB to forward requests to the correct container/task in ECS.
+- Helps route traffic based on the service behind each target group.
+
+### Amazon VPC
+- Provides the private networking layer for the AWS infrastructure.
+- Hosts ECS tasks, load balancers, and supporting resources in a secure, isolated network.
+
+### Subnets
+- Divide the VPC into public and private subnets.
+- Public subnets are usually used for ALB and internet-facing resources.
+- Private subnets are used for backend services and database/cache components.
+
+### Security Groups
+- Control which ports and services can communicate with each other.
+- Example: ALB security group allows HTTP/HTTPS traffic, while backend service security groups allow only required internal ports.
+
+### IAM
+- Used to grant ECS tasks, ECR, and other AWS resources the required permissions.
+- Ensures services can access secrets, logs, and AWS-managed resources securely.
+
+### CloudWatch
+- Collects logs and metrics from ECS tasks and ALB.
+- Helps monitor application health, traffic, and container failures.
+
+## 2. Repo-to-AWS Mapping
+
+This project has a microservice architecture, so the deployment model is:
+
+- Frontend (React + Vite) -> deployed as a web app or container behind ALB
+- Backend Gateway -> deployed as ECS service, handles API routing
+- Service modules -> deployed as separate ECS services/tasks
+- Redis -> typically deployed using Amazon ElastiCache (or ECS-hosted Redis container)
+- MongoDB -> typically deployed using MongoDB Atlas or Amazon DocumentDB depending on implementation choice
+
+## 3. Recommended AWS Deployment Flow
+
+### Step 1: Containerize the app
+Each service should have its own Dockerfile.
+
+Example flow:
+- build gateway image
+- build auth image
+- build interview image
+- build roadmap image
+- build resume image
+- build billing image
+
+### Step 2: Push images to ECR
+- Run `docker build`
+- Tag the images
+- Push them to Amazon ECR
+
+### Step 3: Create ECS cluster
+Create an ECS cluster and define services for:
+- gateway
+- auth
+- interview
+- resume
+- roadmap
+- billing
+
+### Step 4: Configure networking
+- Create a VPC
+- Add public and private subnets
+- Attach security groups
+- Register target groups for each service
+
+### Step 5: Attach ALB
+- Configure an ALB to expose the application to users
+- Route incoming traffic based on path rules and target groups
+
+### Step 6: Deploy services
+- Use ECS tasks with Fargate or EC2 launch type
+- Configure environment variables for DB, Redis, Firebase, Razorpay, and other secrets
+
+### Step 7: Monitor and scale
+- Use CloudWatch logs and alarms
+- Scale ECS services based on CPU, memory, or request count
+
+## 4. AWS Architecture for This Repo
+
+```text
+Internet
+   |
+   v
+Application Load Balancer
+   |
+   +--> Gateway Service (ECS)
+   |        |
+   |        +--> /api/auth
+   |        +--> /api/interview
+   |        +--> /api/roadmap
+   |        +--> /api/resume
+   |        +--> /api/billing
+   |
+   +--> Frontend App (ECS or S3 + CloudFront optional)
+
+Backend Services (ECS Tasks)
+   - Auth
+   - Resume
+   - Interview
+   - Roadmap
+   - Billing
+
+Supporting resources
+   - Redis (ElastiCache or containerized Redis)
+   - MongoDB (MongoDB Atlas / DocumentDB / self-managed)
+   - IAM roles
+   - Security Groups
+   - CloudWatch Logs
+```
+
+## 5. AWS Services Summary
+
+The deployment stack for this repository is best represented by:
+
+- ECR: Docker image storage
+- ECS: Container orchestration
+- ALB: Internet entry point and request routing
+- VPC: Network isolation
+- Subnets: Resource placement
+- Security Groups: Port and access control
+- IAM: Access and identity management
+- CloudWatch: Monitoring and logs
+- Optional AWS services:
+  - ElastiCache for Redis
+  - DocumentDB or MongoDB Atlas for MongoDB
+  - Route 53 for domain routing
+  - ACM for SSL certificates
+
+## 6. Conclusion
+
+Based on the project structure and the deployment notes in this repo, the primary AWS deployment services are:
+
+- Amazon ECR
+- Amazon ECS
+- Application Load Balancer
+- VPC / Subnets / Security Groups
+- IAM
+- CloudWatch
+
+These services match the repo's containerized microservice architecture and the deployment flow described in the project notes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
