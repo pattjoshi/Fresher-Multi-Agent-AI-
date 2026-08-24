@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+!.env.example
+
+# Build artifacts
+dist/
+build/
+out/
+.next/
+.vite/
+coverage/
+*.tsbuildinfo
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Misc runtime/cache
+.cache/
+.tmp/
+tmp/
+*.pid
+*.seed
+*.pid.lock
